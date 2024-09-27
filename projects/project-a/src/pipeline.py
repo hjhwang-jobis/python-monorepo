@@ -6,7 +6,7 @@ class Pipeline(BasePipeline):
         super().__init__()
 
     def run(self):
-        print("Running pipeline A")
+        print("Running ppl A")
 
     def preprocess(self):
         print("Preprocessing data")
