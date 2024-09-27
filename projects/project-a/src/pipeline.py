@@ -9,7 +9,7 @@ class Pipeline(BasePipeline):
         print("Running pipeline A")
 
     def preprocess(self):
-        print("Preprocessing data")
+        print("Preprocessing test")
 
     def feature_extraction(self):
         pass
