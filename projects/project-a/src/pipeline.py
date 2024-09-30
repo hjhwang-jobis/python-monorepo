@@ -1,4 +1,4 @@
-from pkg1.base_pipeline import BasePipeline
+from shared.pkg1.pkg1.base_pipeline import BasePipeline
 
 
 class Pipeline(BasePipeline):

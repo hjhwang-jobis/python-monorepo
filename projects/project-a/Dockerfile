@@ -15,7 +15,7 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 COPY ./poetry.lock ./pyproject.toml ./
 
 # Copy the shared package written in pyproject.toml
-COPY ./pkg1/ /shared/pkg1/
+COPY ../../shared/pkg1/ /shared/pkg1/
 
 RUN poetry config virtualenvs.create false && \
     poetry install --no-root --only main --no-dev
@@ -29,7 +29,7 @@ RUN apt-get update && \
 # Copy the installed packages from the builder image
 COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 
-WORKDIR /project
+WORKDIR /project/project-a
 COPY src/ src/
 COPY run.py .
 
