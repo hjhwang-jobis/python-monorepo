@@ -30,6 +30,7 @@ RUN apt-get update && \
 COPY --from=builder /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 
 WORKDIR /project/project-a
+RUN ls
 COPY src/ src/
 COPY run.py .
 
