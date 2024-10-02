@@ -15,3 +15,10 @@ COPY /project-a /project-a
 RUN pip3 install -r requirements.txt
 
 ENTRYPOINT ["python", "project-a/main.py"]
+
+FROM builder AS project_b
+WORKDIR /project-b
+COPY /project-b /project-b
+RUN pip3 install -r requirements.txt
+
+ENTRYPOINT ["python", "project-b/main.py"]
