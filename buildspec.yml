@@ -13,16 +13,24 @@ phases:
   build:
     commands:
       - "
-
-                \                        for FILE in ${FILES}
-
-                \                        do\ 
-
+      
+                \                       for FILE in ${FILES}
+                
+                \                        do\
+                
                 \                            echo $FILE
                 
-                \                        done\ 
-
-                \                        
+                \                            if [[ $FILE = *ultron/workers/* ]]; then
+                
+                \                                EXECUTE_WORKER=true\
+                
+                \                            elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *ultron/__init__.py* ]]; then
+                
+                \                                EXECUTE_ALL_PIPELINE=true\
+                
+                \                            fi\
+                
+                \                        done\
       "
 
   post_build:
@@ -33,17 +41,19 @@ phases:
       - echo "code source revision id"
       - echo ${CODEBUILD_RESOLVED_SOURCE_VERSION}
       - "
-          if [[ $EXECUTE_ALL_PIPELINE = true ]]; then
-            echo execute all pipeline
-            aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
-          else
-            if [[ $EXECUTE_PROJECT_A = true ]]; then
-              echo execute project a
-              aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
-            elif [[ $EXECUTE_PROJECT_B = true ]]; then
-              echo execute project b
-              aws codepipeline start-pipeline-execution --name test_project_b --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
-            fi
-          fi
-        "
+      
+        \ if [[ $EXECUTE_ALL_PIPELINE = true ]]; then
+        
+        \   echo execute all pipeline\
+        
+        \ else\
+        
+        \   if [[ $EXECUTE_WORKER = true ]]; then
+        
+        \     echo execute project a\
+        
+        \   fi\
+        
+        \ fi\
+      "
       - 1234
