@@ -12,8 +12,7 @@ phases:
       - EXECUTE_PROJECT_B=false
   build:
     commands:
-      - for FILE in ${FILES} do echo $FILE done
-      - echo ${EXECUTE_ALL_PIPELINE}
+      - echo $FILES
 
   post_build:
     commands:
