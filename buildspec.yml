@@ -15,8 +15,12 @@ phases:
       - '
           for FILE in ${FILES} \
             do \
-              echo "$FILE" \
-            done
+              echo ${FILE} \
+              if [[ ${FILE} =~ "shared/" ]]; then 
+                EXECUTE_ALL_PIPELINE = true \
+              fi \
+          done
+          echo ${EXECUTE_ALL_PIPELINE}
         '
 
   post_build:
