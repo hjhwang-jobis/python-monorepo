@@ -13,7 +13,7 @@ phases:
   build:
     commands:
       - "
-          for FILE in ${FILES}\
+          for FILE in ${FILES} \
             do \
               echo $FILE \
               if [[ $FILE = *shared/* ]]; then \
