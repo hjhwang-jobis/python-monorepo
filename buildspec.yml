@@ -15,29 +15,25 @@ phases:
   build:
     commands:
       - "
-      
-                \                       for FILE in ${FILES}
-                
-                \                        do\
-                
-                \                            echo $FILE
-                
-                \                            if [[ $FILE = *ultron/workers/* ]]; then
-                
-                \                                EXECUTE_WORKER=true\
-                
-                \                            elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *ultron/__init__.py* ]]; then
-                
-                \                                EXECUTE_ALL_PIPELINE=true\
-                
-                \                            elif [[ $FILE = *buildspec* ]]; then
-                
-                \                                EXECUTE_BUILDSPEC=true\
-                
-                \                            fi\
-                
-                \                        done\
-      "
+          
+        \                       for FILE in ${FILES}
+          
+        \                        do\
+          
+        \                            echo $FILE
+          
+        \                            if [[ $FILE = *ultron/workers/* ]]; then
+          
+        \                                EXECUTE_WORKER=true\
+        
+        \                            elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *ultron/__init__.py* ]]; then
+          
+        \                                EXECUTE_ALL_PIPELINE=true\
+          
+        \                            fi\
+          
+        \                        done\
+        "
 
   post_build:
     commands:
