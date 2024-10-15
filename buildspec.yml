@@ -1,0 +1,50 @@
+version: 0.2
+env:
+  git-credentials-helper: "yes"
+  shell: bash
+run-as: root
+phases:
+  pre_build:
+    commands:
+      - FILES=$(git diff --name-only HEAD^)
+      - EXECUTE_ALL_PIPELINE=false
+      - EXECUTE_PROJECT_A=false
+      - EXECUTE_PROJECT_B=false
+  build:
+    commands:
+      - "
+          for FILE in ${FILES}
+            do
+              echo $FILE
+              if [[ $FILE = *shared/* ]]; then
+                EXECUTE_ALL_PIPELINE=true\
+              elif [[ $FILE = *project-a* ]]; then
+                EXECUTE_PROJECT_A=true\
+              elif [[ $FILE = *project-b* ]]; then
+                EXECUTE_PROJECT_B=true\
+              fi
+          done
+        "
+
+  post_build:
+    commands:
+      - echo ${EXECUTE_ALL_PIPELINE}
+      - echo ${EXECUTE_PROJECT_A}
+      - echo ${EXECUTE_PROJECT_B}
+      - echo "code source revision id"
+      - echo ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      - "
+          if [[ $EXECUTE_ALL_PIPELINE = true ]]; then
+            echo execute all pipeline
+            aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+          else
+            if [[ $EXECUTE_PROJECT_A = true ]]; then
+              echo execute project a
+              aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+            elif [[ $EXECUTE_PROJECT_B = true ]]; then
+              echo execute project b
+              aws codepipeline start-pipeline-execution --name test_project_b --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+            fi
+          fi
+        "
+      - 1234
