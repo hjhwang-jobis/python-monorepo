@@ -14,15 +14,25 @@ phases:
     commands:
       - "
           for FILE in ${FILES}\
+        \ 
             do\
+        \
               echo $FILE\
+        \
               if [[ $FILE = *shared/* ]]; then\
+        \
                 EXECUTE_ALL_PIPELINE=true\
+        \
               elif [[ $FILE = *project-a* ]]; then\
+        \
                 EXECUTE_PROJECT_A=true\
+        \
               elif [[ $FILE = *project-b* ]]; then\
+        \
                 EXECUTE_PROJECT_B=true\
+        \
               fi\
+        \
           done
         "
 
