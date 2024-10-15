@@ -12,8 +12,18 @@ phases:
       - EXECUTE_PROJECT_B=false
   build:
     commands:
-      - echo $FILES
-      - for i in $FILES do echo "Running loop seq" $i done
+      - "
+
+                \                        for FILE in ${FILES}
+
+                \                        do\ 
+
+                \                            echo $FILE
+                
+                \                        done\ 
+
+                \                        
+      "
 
   post_build:
     commands:
