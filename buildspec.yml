@@ -10,6 +10,8 @@ phases:
       - EXECUTE_ALL_PIPELINE=false
       - EXECUTE_PROJECT_A=false
       - EXECUTE_PROJECT_B=false
+      - EXECUTE_WORKER=false
+      - EXECUTE_BUILDSPEC=false
   build:
     commands:
       - "
@@ -27,6 +29,10 @@ phases:
                 \                            elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *ultron/__init__.py* ]]; then
                 
                 \                                EXECUTE_ALL_PIPELINE=true\
+                
+                \                            elif [[ $FILE = *buildspec* ]]; then
+                
+                \                                EXECUTE_BUILDSPEC=true\
                 
                 \                            fi\
                 
@@ -50,7 +56,11 @@ phases:
         
         \   if [[ $EXECUTE_WORKER = true ]]; then
         
-        \     echo execute project a\
+        \     echo execute worker\
+        
+        \   elif [[ $EXECUTE_BUILDSPEC = true ]]; then
+        
+        \     echo execute buildspec\
         
         \   fi\
         
