@@ -14,18 +14,23 @@ phases:
       - EXECUTE_BUILDSPEC=false
   build:
     commands:
-      - animals=( ["moo"]="cow" ["woof"]="dog")
-      - echo "${animals[moo]}"
+      - ARRAY=( "cow:moo", "dinosaur:roar", "bird:chirp", "bash:rock" )
       - "
       
-        \                       for sound in ${!animals[@]}
-         
-        \                         do\
-                                 
-        \                           echo $sound - ${animals[$sound]} \
-         
-        \                         done\
-        "
+      \                          for animal in ${ARRAY[@]}
+                                
+      \                             do\
+      
+      \                             KEY=${animal%%:*}\
+      
+      \                             VALUE=${animal##*:}\
+      
+      \                             echo $KEY\
+      
+      \                             echo $VALUE\
+      
+      \                             done\
+      "
       - "
           
         \                       for FILE in ${FILES}
