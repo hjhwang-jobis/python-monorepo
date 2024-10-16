@@ -1,6 +1,6 @@
 version: 0.2
 env:
-  git-credentials-helper: "yes"
+  git-credential-helper: yes
   shell: bash
 run-as: root
 phases:
@@ -14,6 +14,8 @@ phases:
       - EXECUTE_BUILDSPEC=false
       - declare -A example_array=(["key1"]="value1" ["key2"]="value2" ["key3"]="value3")
       - echo ${#example_array[@]}
+      - my_array=("first" "second" "third" "fourth"); for item in "${my_array[@]}"; do echo "$item" ; done
+      - example_array=(["key1"]="value1" ["key2"]="value2" ["key3"]="value3"); for item in "${!my_array[@]}"; do echo "$example_array[$item]" ; done
   build:
     commands:
       - |      
