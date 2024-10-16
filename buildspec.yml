@@ -14,7 +14,18 @@ phases:
       - EXECUTE_BUILDSPEC=false
   build:
     commands:
-      - bash --version
+      - animals=( ["moo"]="cow" ["woof"]="dog")
+      - echo "${animals[moo]}"
+      - "
+      
+        \                       for sound in ${!animals[@]}
+         
+        \                         do\
+                                 
+        \                           echo $sound - ${animals[$sound]} \
+         
+        \                         done\
+        "
       - "
           
         \                       for FILE in ${FILES}
