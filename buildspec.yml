@@ -27,7 +27,6 @@ phases:
           do
             echo ${key}
           done
-      -
       - "
       
       \                          for animal in ${ARRAY[@]}
