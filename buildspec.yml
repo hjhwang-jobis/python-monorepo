@@ -12,9 +12,7 @@ phases:
       - EXECUTE_PROJECT_B=false
       - EXECUTE_WORKER=false
       - EXECUTE_BUILDSPEC=false
-  build:
-    commands:
-      - declare -gA example_array
+      - declare -A example_array
       - example_array["key1"]="value1"
       - example_array["key2"]="value2"
       - example_array["key3"]="value3"
@@ -22,9 +20,11 @@ phases:
       - echo ${!example_array[@]}
       - echo ${#example_array[@]}
       - echo ${example_array["key1"]}
+  build:
+    commands:
       - |      
         for key in ${!example_array[@]}; do
-            echo ${key}
+            echo $key
         done
       - |          
         for FILE in ${FILES}; do
