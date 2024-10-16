@@ -14,7 +14,7 @@ phases:
       - EXECUTE_BUILDSPEC=false
   build:
     commands:
-      - declare -A example_array
+      - declare -gA example_array
       - example_array["key1"]="value1"
       - example_array["key2"]="value2"
       - example_array["key3"]="value3"
