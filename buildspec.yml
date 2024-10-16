@@ -26,25 +26,15 @@ phases:
         for key in ${!example_array[@]}; do
             echo ${key}
         done
-      - "
-          
-        \                       for FILE in ${FILES}
-          
-        \                        do\
-          
-        \                            echo $FILE
-          
-        \                            if [[ $FILE = *ultron/workers/* ]]; then
-          
-        \                                EXECUTE_WORKER=true\
-        
-        \                            elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *project-a/__init__.py* ]]; then
-          
-        \                                EXECUTE_ALL_PIPELINE=true\
-          
-        \                            fi\
-          
-        \                        done\
+      - |          
+        for FILE in ${FILES}; do
+          echo $FILE
+          if [[ $FILE = *ultron/workers/* ]]; then
+            EXECUTE_WORKER=true
+          elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *project-a/__init__.py* ]]; then
+            EXECUTE_ALL_PIPELINE=true
+          fi
+        done
         "
 
   post_build:
