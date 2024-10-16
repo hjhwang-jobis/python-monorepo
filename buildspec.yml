@@ -12,7 +12,7 @@ phases:
       - EXECUTE_PROJECT_B=false
       - EXECUTE_WORKER=false
       - EXECUTE_BUILDSPEC=false
-      - declare -A example_array=$(["key1"]="value1", ["key2"]="value2", ["key3"]="value3")
+      - declare -A example_array=(["key1"]="value1" ["key2"]="value2" ["key3"]="value3")
       - echo ${#example_array[@]}
   build:
     commands:
