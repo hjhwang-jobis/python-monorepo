@@ -15,7 +15,7 @@ phases:
       - declare -A example_array=(["key1"]="value1" ["key2"]="value2" ["key3"]="value3")
       - echo ${#example_array[@]}
       - my_array=("first" "second" "third" "fourth"); for item in "${my_array[@]}"; do echo "$item" ; done
-      - example_array=(["key1"]="value1" ["key2"]="value2" ["key3"]="value3"); for item in "${!my_array[@]}"; do echo "$example_array[$item]" ; done
+      - example_array=(["key1"]="value1" ["key2"]="value2" ["key3"]="value3"); for item in "${!my_array[@]}"; do echo $item; done
   build:
     commands:
       - |      
