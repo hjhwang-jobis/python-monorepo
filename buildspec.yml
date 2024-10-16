@@ -14,7 +14,7 @@ phases:
       - EXECUTE_BUILDSPEC=false
   build:
     commands:
-      - declare -A my_dict=(["hello"]="world" ['hj"]="test" [1]=3)
+      - declare -A my_dict=(["hello"]="world" ["hj"]="test" [1]=3)
       - echo ${!my_dict[@]}
       - "
       
