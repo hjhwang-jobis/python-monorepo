@@ -14,7 +14,7 @@ phases:
       - EXECUTE_BUILDSPEC=false
   build:
     commands:
-      - ARRAY=( "cow:moo", "dinosaur:roar", "bird:chirp", "bash:rock" )
+      - echo ${BASH_VERSION}
       - "
       
       \                          for animal in ${ARRAY[@]}
