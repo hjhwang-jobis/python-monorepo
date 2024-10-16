@@ -14,8 +14,8 @@ phases:
       - EXECUTE_BUILDSPEC=false
   build:
     commands:
-      - declare -A my_dict=([hello]=world [hj]=test)
-      - echo ${!my_dict[@]}
+      - declare -A animals=( ["moo"]="cow" ["woof"]="dog")
+      - echo ${animals}
       - "
       
         \                         for key in ${!my_dict[@]}
