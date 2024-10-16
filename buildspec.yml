@@ -26,7 +26,7 @@ phases:
           
         \                                EXECUTE_WORKER=true\
         
-        \                            elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *ultron/__init__.py* ]]; then
+        \                            elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *project-a/__init__.py* ]]; then
           
         \                                EXECUTE_ALL_PIPELINE=true\
           
