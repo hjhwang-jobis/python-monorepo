@@ -14,8 +14,14 @@ phases:
       - EXECUTE_BUILDSPEC=false
   build:
     commands:
-      - declare -A animals=( ["moo"]="cow" ["woof"]="dog")
-      - echo ${animals}
+      - declare -A example_array
+      - example_array["key1"]="value1"
+      - example_array["key2"]="value2"
+      - example_array["key3"]="value3"
+      - echo ${example_array[@]}
+      - echo ${!example_array[@]}
+      - echo ${#example_array[@]}
+      - echo ${example_array["key1"]}
       - "
       
         \                         for key in ${!my_dict[@]}
