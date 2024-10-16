@@ -22,11 +22,10 @@ phases:
       - echo ${!example_array[@]}
       - echo ${#example_array[@]}
       - echo ${example_array["key1"]}
-      - >      
-        for key in ${!example_array[@]};
-          do
+      - |      
+        for key in ${!example_array[@]}; do
             echo ${key}
-          done
+        done
       - "
           
         \                       for FILE in ${FILES}
