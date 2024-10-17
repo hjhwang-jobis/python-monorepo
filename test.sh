@@ -20,7 +20,7 @@ process_map() {
     {
         for (i=1; i<=NF; i+=2) {
             print $i $(i+1)
-            system("process_value" $i " " $(i+1))
+            system("process_value " $i " " $(i+1))
         }
     }'
 }
