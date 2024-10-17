@@ -12,10 +12,11 @@ phases:
       - EXECUTE_PROJECT_B=false
       - EXECUTE_WORKER=false
       - EXECUTE_BUILDSPEC=false
-      - map_data="EXECUTE_ALL_PIPELINE:false#EXECUTE_SAMPLE_WORKER:false"
+      - map_data="EXECUTE_ALL_PIPELINE:true#EXECUTE_SAMPLE_WORKER:false"
       - my_array=("first" "second" "third" "fourth"); for item in "${my_array[@]}"; do echo "$item" ; done
       - sudo chmod 777 test.sh
-      - bash test.sh $map_data "EXECUTE_ALL_PIPELINE"
+      - status = $(bash test.sh $map_data "EXECUTE_ALL_PIPELINE")
+      - echo status $status
 
   build:
     commands:

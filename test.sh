@@ -1,17 +1,18 @@
 #!/bin/bash
 
-map_data=$1
-var=$2
+map_status=$1
+worker_name=$2
 
-function process_map {
-  targets=($(echo $1 | tr ":#" "\n"))
-  for (( i=0; i<${#targets[@]}; i+=2 )); do
-    if [[ ${targets[i]} =~ $2 ]]; then
-      echo ${targets[i+1]} | tr -d " "
+function check_updated_worker {
+  status=($(echo $1 | tr ":#" "\n"))
+  for (( i=0; i<${#status[@]}; i+=2 )); do
+    if [[ ${status[i]} =~ $2 ]]; then
+      echo ${status[i+1]} | tr -d " "
       exit
     fi
   done
+  echo "false"
 }
 
-data=$(process_map $map_data $var)
-echo "the value is " $data
+is_updated=$(check_updated_worker $map_status $worker_name)
+echo "the value is " $is_updated
