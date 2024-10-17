@@ -5,6 +5,7 @@ var=$2
 
 function process_map {
   target=($(echo $1 | tr ":#" "\n"))
+  echo "mapdata " $1 " var " $2
   for (( i=0; i<${#targets[@]}; i+=2 )); do
     echo "mapdata " ${targets[i]}" var " $2
     if [[ ${targets[i]} =~ $2 ]]; then
