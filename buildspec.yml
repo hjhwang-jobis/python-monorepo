@@ -7,9 +7,8 @@ phases:
   pre_build:
     commands:
       - FILES=$(git diff --name-only HEAD^)
-      - EXECUTE_ALL_PIPELINE=false
-      - EXECUTE_BUILDSPEC=false
       - worker_data="project_a:false#project_b:false"
+      - env=sb
       - sudo chmod 777 execute_worker_pipeline.sh
       - sudo chmod 777 update_worker_status.sh
 
@@ -17,11 +16,11 @@ phases:
     commands:
       - |
         for FILE in ${FILES}; do
-          echo $FILE
-          worker_data=$(bash update_worker_status.sh $worker_data $FILE)  
+          echo ${FILE}
+          worker_data=$(bash update_worker_status.sh ${worker_data} ${FILE})  
         done
 
   post_build:
     commands:
       - echo ${worker_data}
-      - bash execute_worker_pipeline.sh $worker_data ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      - bash execute_worker_pipeline.sh ${worker_data} ${CODEBUILD_RESOLVED_SOURCE_VERSION} ${env}
