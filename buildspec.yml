@@ -12,9 +12,27 @@ phases:
       - EXECUTE_PROJECT_B=false
       - EXECUTE_WORKER=false
       - EXECUTE_BUILDSPEC=false
-      - declare -A example_array=(["key1"]="value1" ["key2"]="value2" ["key3"]="value3")
-      - echo ${#example_array[@]}
+      - map_data="EXECUTE_ALL_PIPELINE:false EXECUTE_SAMPLE_WORKER:false"
       - my_array=("first" "second" "third" "fourth"); for item in "${my_array[@]}"; do echo "$item" ; done
+      - |
+        process_value() {
+            local key=$1
+            local value=$2
+            echo "Processing $key with value $value"
+        }
+      - |
+        process_map() {
+            echo "$1" | awk '
+            BEGIN {
+                FS="[: ]"
+            }
+            {
+                for (i=1; i<=NF; i+=2) {
+                    system("process_value " $i " " $(i+1))
+                }
+            }'
+        }
+      - process_map "$map_data"
       - |
         for item in ${my_array[@]}; do
           echo $item
