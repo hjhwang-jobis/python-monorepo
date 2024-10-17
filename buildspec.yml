@@ -22,6 +22,7 @@ phases:
         }
       - |
         process_map() {
+            echo $@
             echo $@ | aws '
             BEGIN {
               FS="[: ]"
