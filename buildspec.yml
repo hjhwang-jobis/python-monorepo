@@ -22,13 +22,13 @@ phases:
         }
       - |
         process_map() {
-            echo "$1" | awk '
+            echo $@ | aws '
             BEGIN {
-                FS="[: ]"
+              FS="[: ]"
             }
             {
                 for (i=1; i<=NF; i+=2) {
-                    system("process_value " $i " " $(i+1))
+                    print $i " " $(i+1))
                 }
             }'
         }
