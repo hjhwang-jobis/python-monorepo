@@ -18,7 +18,7 @@ phases:
       - |
         for FILE in ${FILES}; do
           echo $FILE
-          worker_data=$(update_workers_status $worker_data $FILE)  
+          worker_data=$(bash update_workers_status.sh $worker_data $FILE)  
         done
 
   post_build:
