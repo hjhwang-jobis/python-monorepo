@@ -24,8 +24,8 @@ process_map() {
 
     }
     END {
-      return "key1:1 key2:2 key3:3"
     }'
+    return "key1:1 key2:2 key3:3"
 }
 
 # 실행
