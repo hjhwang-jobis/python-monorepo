@@ -15,7 +15,7 @@ phases:
       - map_data="EXECUTE_ALL_PIPELINE:false#EXECUTE_SAMPLE_WORKER:false"
       - my_array=("first" "second" "third" "fourth"); for item in "${my_array[@]}"; do echo "$item" ; done
       - sudo chmod 777 test.sh
-      - ./test.sh $map_data "EXECUTE_ALL_PIPELINE"
+      - bash test.sh $map_data "EXECUTE_ALL_PIPELINE"
 
   build:
     commands:
