@@ -5,7 +5,7 @@ file_path=$2
 
 function update_workers_status {
   updated_status=""
-  status=($(echo $1 | tr ":#" "\n"))
+  status=($(echo $workers_status | tr ":#" "\n"))
   for (( i=0; i<${#status[@]}; i+=2 )); do
     if [[ $2 =~ "/"${status[i]}"/"  ]]; then
       updated_status=$updated_status"#"${status[i]}":true"

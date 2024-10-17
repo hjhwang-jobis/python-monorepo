@@ -4,7 +4,7 @@ workers_status=$1
 CODEBUILD_RESOLVED_SOURCE_VERSION=$2
 
 function execute_worker_pipeline {
-  status=($(echo $1 | tr ":#" "\n"))
+  status=($(echo $workers_status | tr ":#" "\n"))
   echo $CODEBUILD_RESOLVED_SOURCE_VERSION
   execute_all_pipelines="true"
   for (( i=0; i<${#status[@]}; i+=2 )); do
@@ -24,4 +24,4 @@ function execute_worker_pipeline {
   fi
 }
 
-execute_worker_pipeline $workers_status
+execute_worker_pipeline
