@@ -10,7 +10,7 @@ phases:
       - EXECUTE_ALL_PIPELINE=false
       - EXECUTE_BUILDSPEC=false
       - worker_data="project_a:false#project_b:false"
-      - sudo chmod 777 get_worker_status.sh
+      - sudo chmod 777 execute_worker_pipeline.sh
       - sudo chmod 777 update_worker_status.sh
 
   build:
@@ -24,12 +24,4 @@ phases:
   post_build:
     commands:
       - echo ${worker_data}
-      - |
-        status=($(echo $worker_data | tr ":#" "\n"))
-        for ( i=0; i<${#status[@]}; i+=2 ); do
-          if [[ ${status[i+1]} = "true" ]]; then
-            pipeline_name=data-ai-apne2-ultron-${status[i]//_/-}-pipeline-stg
-            echo ${pipeline_name}
-            aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
-          fi
-        done
+      - bash execute_worker_pipeline.sh $worker_data

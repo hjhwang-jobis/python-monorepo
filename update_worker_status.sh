@@ -13,7 +13,7 @@ function update_workers_status {
       updated_status=$updated_status"#"${status[i]}":"${status[i+1]}
     fi
   done
-  echo $updated_status
+  echo ${updated_status:1}
 }
 
 updated_status=$(update_workers_status $workers_status $file_path)
