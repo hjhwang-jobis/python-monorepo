@@ -21,7 +21,10 @@ process_map() {
         for (i=1; i<=NF; i+=2) {
             print $i $(i+1)
         }
-        return "key1:1 key2:2 key3:3"
+
+    }
+    END {
+      return "key1:1 key2:2 key3:3"
     }'
 }
 
