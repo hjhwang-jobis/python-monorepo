@@ -13,6 +13,7 @@ function execute_worker_pipeline {
     fi
     aws --version
   done
+  echo "execute_all_pipeline value is: "$execute_all_pipelines
   if [[ execute_all_pipelines = "true" ]]; then
     for (( i=0; i<${#status[@]}; i+=2 )); do
       pipeline_name=data-ai-apne2-ultron-${status[i]//_/-}-pipeline-stg
