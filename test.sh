@@ -13,5 +13,6 @@ function process_map {
   done
 }
 
+echo "mapdata " $map_data " var " $var
 data=$(process_map $map_data $var)
 echo "the value is " $data
