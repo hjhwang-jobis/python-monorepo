@@ -14,6 +14,8 @@ phases:
       - EXECUTE_BUILDSPEC=false
       - map_data="EXECUTE_ALL_PIPELINE:false EXECUTE_SAMPLE_WORKER:false"
       - my_array=("first" "second" "third" "fourth"); for item in "${my_array[@]}"; do echo "$item" ; done
+      - ./test.sh
+      - bash test.sh
       - |
         process_value() {
             local key=$1
