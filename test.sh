@@ -1,34 +1,17 @@
 #!/bin/bash
 
-# 맵 데이터를 문자열로 정의
-map_data="EXECUTE_ALL_PIPELINE:false EXECUTE_SAMPLE_WORKER:false"
+map_data=$1
+var=$2
 
-# 특정 함수 정의
-process_value() {
-    local key=$1
-    local value=$2
-    echo "Processing $key with value $value"
-    # 여기에 원하는 처리를 추가할 수 있습니다.
+function process_map {
+  target=($(echo $1 | tr ":#" "\n"))
+  for (( i=0; i<${#targets[@]}; i+=2 )); do
+    if [[ ${targets[i]} =~ $2 ]]; then
+      echo ${targets[i+1]} | tr -d " "
+      exit
+    fi
+  done
 }
 
-# 맵 데이터를 순회하면서 함수 실행
-process_map() {
-    echo "$@" | awk '
-    BEGIN {
-        FS="[: ]"
-    }
-    {
-        for (i=1; i<=NF; i+=2) {
-            print $i $(i+1)
-        }
-
-    }
-    END {
-    }'
-    return "key1:1 key2:2 key3:3"
-}
-
-# 실행
-process_map "$map_data"
-map_data=$?
-echo $map_data
+data=$(process_map $map_data $var)
+echo "the value is " $data
