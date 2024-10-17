@@ -20,10 +20,12 @@ process_map() {
     {
         for (i=1; i<=NF; i+=2) {
             print $i $(i+1)
-            system("process_value " $i " " $(i+1))
+            $i="hj"
+            $(i+1)="test"
         }
     }'
 }
 
 # 실행
 process_map "$map_data"
+map_data
