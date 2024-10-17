@@ -20,8 +20,6 @@ process_map() {
     {
         for (i=1; i<=NF; i+=2) {
             print $i $(i+1)
-            $i="hj"
-            $(i+1)="test"
         }
     }'
 }
