@@ -28,4 +28,4 @@ process_map() {
 
 # 실행
 process_map "$map_data"
-map_data
+echo $map_data
