@@ -11,14 +11,14 @@ RUN apt-get update && \
 FROM builder AS project_a
 
 WORKDIR /project-a
-COPY /project-a /project-a
+COPY /project_a /project-a
 RUN pip3 install -r requirements.txt
 
 ENTRYPOINT ["python", "project-a/main.py"]
 
 FROM builder AS project_b
 WORKDIR /project-b
-COPY /project-b /project-b
+COPY /project_b /project-b
 RUN pip3 install -r requirements.txt
 
 ENTRYPOINT ["python", "project-b/main.py"]

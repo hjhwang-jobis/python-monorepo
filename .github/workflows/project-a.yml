@@ -5,19 +5,19 @@ on:
     branches:
       - main
     paths:
-      - projects/project-b/src/**
+      - projects/project_b/src/**
   pull_request:
     branches:
       - main
     paths:
-      - projects/project-b/src/**
+      - projects/project_b/src/**
 
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: projects/project-b
+        working-directory: projects/project_b
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image

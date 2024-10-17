@@ -8,52 +8,28 @@ phases:
     commands:
       - FILES=$(git diff --name-only HEAD^)
       - EXECUTE_ALL_PIPELINE=false
-      - EXECUTE_PROJECT_A=false
-      - EXECUTE_PROJECT_B=false
-      - EXECUTE_WORKER=false
       - EXECUTE_BUILDSPEC=false
-      - map_data="EXECUTE_ALL_PIPELINE:true#EXECUTE_SAMPLE_WORKER:false"
-      - sudo chmod 777 test.sh
-      - status=$(bash test.sh $map_data "EXECUTE_ALL_PIPELINE")
-      - echo status $status
+      - worker_data="project_a:false#project_b:false"
+      - sudo chmod 777 get_worker_status.sh
+      - sudo chmod 777 update_worker_status.sh
 
   build:
     commands:
-      - |          
+      - |
         for FILE in ${FILES}; do
           echo $FILE
-          if [[ $FILE = *ultron/workers/* ]]; then
-            EXECUTE_WORKER=true
-          elif [[ $FILE = *ultron/libs/* ]] || [[ $FILE = *project-a/__init__.py* ]]; then
-            EXECUTE_ALL_PIPELINE=true
-          fi
+          worker_data=$(update_workers_status $worker_data $FILE)  
         done
 
   post_build:
     commands:
-      - echo ${EXECUTE_ALL_PIPELINE}
-      - echo ${EXECUTE_PROJECT_A}
-      - echo ${EXECUTE_PROJECT_B}
-      - echo "code source revision id"
-      - echo ${CODEBUILD_RESOLVED_SOURCE_VERSION}
-      - "
-      
-        \ if [[ $EXECUTE_ALL_PIPELINE = true ]]; then
-        
-        \   echo execute all pipeline\
-        
-        \ else\
-        
-        \   if [[ $EXECUTE_WORKER = true ]]; then
-        
-        \     echo execute worker\
-        
-        \   elif [[ $EXECUTE_BUILDSPEC = true ]]; then
-        
-        \     echo execute buildspec\
-        
-        \   fi\
-        
-        \ fi\
-      "
-      - 1234
+      - echo ${worker_data}
+      - |
+        status=($(echo $worker_data | tr ":#" "\n"))
+        for ( i=0; i<${#status[@]}; i+=2 ); do
+          if [[ ${status[i+1]} = "true" ]]; then
+            pipeline_name=data-ai-apne2-ultron-${status[i]//_/-}-pipeline-stg
+            echo ${pipeline_name}
+            aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+          fi
+        done
