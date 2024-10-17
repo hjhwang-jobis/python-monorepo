@@ -16,7 +16,6 @@ phases:
       - my_array=("first" "second" "third" "fourth"); for item in "${my_array[@]}"; do echo "$item" ; done
       - sudo chmod 777 test.sh
       - ./test.sh
-      - bash test.sh
       - |
         process_value() {
             local key=$1

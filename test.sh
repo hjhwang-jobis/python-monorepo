@@ -21,9 +21,11 @@ process_map() {
         for (i=1; i<=NF; i+=2) {
             print $i $(i+1)
         }
+        return "key1:1 key2:2 key3:3"
     }'
 }
 
 # 실행
 process_map "$map_data"
+map_data=$?
 echo $map_data
