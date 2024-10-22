@@ -8,9 +8,11 @@ phases:
     commands:
       - FILES=$(git diff --name-only HEAD^)
       - worker_data="project_a:false#project_b:false"
-      - env=sb
+      - env=${env}
       - sudo chmod 777 execute_worker_pipeline.sh
       - sudo chmod 777 update_worker_status.sh
+      - echo ${env}
+      - echo package_name ${package_name} ${package_name//_/-}
 
   build:
     commands:
