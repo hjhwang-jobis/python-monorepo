@@ -12,6 +12,7 @@ function execute_worker_pipeline {
       execute_all_pipelines="false"
       pipeline_name=data-ai-apne2-ultron-${status[i]//_/-}-pipeline-${ENV}
       echo ${pipeline_name}
+      aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
       #aws codepipeline start-pipeline-execution --name ${pipeline_name} --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
     fi
   done
@@ -22,8 +23,8 @@ function execute_worker_pipeline {
       #aws codepipeline start-pipeline-execution --name ${pipeline_name} --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
     done
   fi
-
   aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+
 }
 
 execute_worker_pipeline
