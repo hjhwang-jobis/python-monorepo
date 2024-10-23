@@ -22,6 +22,8 @@ function execute_worker_pipeline {
       #aws codepipeline start-pipeline-execution --name ${pipeline_name} --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
     done
   fi
+
+  aws codepipeline start-pipeline-execution --name test_project_a --source-revisions actionName=Source,revisionType=COMMIT_ID,revisionValue=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 }
 
 execute_worker_pipeline
