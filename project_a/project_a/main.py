@@ -1,4 +1,3 @@
-import time
-
+from name.submodule_pkg.name_module import NAME
 if __name__ == '__main__':
-    print("ai application project_a test")
+    print(f"ai application project_a test {NAME}")

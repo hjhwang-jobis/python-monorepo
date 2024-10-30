@@ -1,0 +1,3 @@
+[submodule "project_a/project_a/name"]
+	path = project_a/project_a/name
+	url = git@github.com:hjhwang-jobis/submodule_project_monorepo.git
